@@ -63,23 +63,20 @@ function App() {
 
   return (
     <>
-      <div>
-        <UserList users={users} />
-        <ProjectList projects={projects} />
-      </div>
-      <div>
-        <CreateUser addUser={addUser} />
-      </div>
-      <div>
-        <DeleteUsers users={users} deleteUser={deleteUser} />
-      </div>
-      <div>
-        <AddProject onAdd={addProject} />
-      </div>
-      <div>
-        <DeleteProjects projects={projects} onDelete={deleteProject} />
-      </div>
-    </>
+  <div className="app-row">
+    <UserList users={users} />
+    <ProjectList projects={projects} />
+  </div>
+  <div className="form-row">
+    <CreateUser addUser={addUser} />
+    <AddProject onAdd={addProject} />
+  </div>
+  <div className="form-row">
+    <DeleteUsers users={users} deleteUser={deleteUser} />
+    <DeleteProjects projects={projects} onDelete={deleteProject} />
+  </div>
+</>
+
   );
 }
 export default App;

@@ -1,97 +1,115 @@
 import React, { useState } from "react";
 
 const AddProject = ({ onAdd }) => {
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState(""); // non usato
-  const [duration, setDuration] = useState(0);
-  const [code, setCode] = useState("");
-  const [state, setState] = useState("OPEN");
-  const [manager, setManager] = useState("");
-  
-  const handleSubmit = (e) => {
+  const [form, setForm] = useState({
+    name: "",
+    description: "",
+    startDate: "",
+    duration: 0,
+    code: "",
+    state: "OPEN",
+    manager: ""
+  });
+
+  const handleChange = e => {
+    const { name, value } = e.target;
+    setForm({ ...form, [name]: name === "duration" ? Number(value) : value });
+  };
+
+  const handleSubmit = e => {
     e.preventDefault();
-    
-    if (!name.trim() || !description.trim()) return;
-    setName("");
-    setDescription("");
-    setStartDate("");
-    setDuration(0);
-    setCode("");
-    setState("OPEN");
-    setManager("");
+    if (!form.name.trim() || !form.description.trim()) return;
+    onAdd(form);
+    setForm({
+      name: "",
+      description: "",
+      startDate: "",
+      duration: 0,
+      code: "",
+      state: "OPEN",
+      manager: ""
+    });
   };
 
   return (
     <form className="form-project" onSubmit={handleSubmit}>
       <h2 className="form-title">Create new project</h2>
 
-      <label htmlFor="name">Project Name</label>
-      <input
-        id="name"
-        type="text"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        placeholder="Project name"
-        required
-      />
+      <div className="field">
+        <label>Project Name:</label>
+        <input
+          name="name"
+          value={form.name}
+          onChange={handleChange}
+          required
+        />
+      </div>
 
-      <label htmlFor="description">Description</label>
-      <input
-        id="description"
-        type="text"
-        value={description}
-        onChange={(e) => setDescription(e.target.value)}
-        placeholder="Project description"
-        required
-      />
+      <div className="field">
+        <label>Description:</label>
+        <input
+          name="description"
+          value={form.description}
+          onChange={handleChange}
+          required
+        />
+      </div>
 
-      <label htmlFor="startDate">Start Date</label>
-      <input
-        id="startDate"
-        type="date"
-        value={startDate}
-        onChange={(e) => setStartDate(e.target.value)}
-        required
-      />
+      <div className="field">
+        <label>Start Date:</label>
+        <input
+          name="startDate"
+          type="date"
+          value={form.startDate}
+          onChange={handleChange}
+          required
+        />
+      </div>
 
-      <label htmlFor="duration">Duration</label>
-      <input
-        id="duration"
-        type="number"
-        value={duration}
-        onChange={(e) => setDuration(Number(e.target.value))}
-        required
-      />
+      <div className="field">
+        <label>Duration (days):</label>
+        <input
+          name="duration"
+          type="number"
+          value={form.duration}
+          onChange={handleChange}
+          required
+        />
+      </div>
 
-      <label htmlFor="code">Code</label>
-      <input
-        id="code"
-        type="text"
-        value={code}
-        onChange={(e) => setCode(e.target.value)}
-        placeholder="Project code"
-        required
-      />
+      <div className="field">
+        <label>Project Code:</label>
+        <input
+          name="code"
+          value={form.code}
+          onChange={handleChange}
+          required
+        />
+      </div>
 
-      <label htmlFor="state">State</label>
-      <select id="state" value={state} onChange={(e) => setState(e.target.value)}>
-        <option value="OPEN">Active</option>
-        <option value="CLOSE">Closed</option>
-      </select>
+      <div className="field">
+        <label>State:</label>
+        <select
+          name="state"
+          value={form.state}
+          onChange={handleChange}
+        >
+          <option value="OPEN">Active</option>
+          <option value="CLOSE">Closed</option>
+        </select>
+      </div>
 
-   <label htmlFor="manager">Manager name</label>
-<input
-  id="manager"
-  type="text"
-  value={manager}
-  onChange={(e) => setManager(e.target.value)}
-  placeholder="Manager name"
-/>
+      <div className="field">
+        <label>Manager Username:</label>
+        <input
+          name="manager"
+          value={form.manager}
+          onChange={handleChange}
+          placeholder="Manager username"
+        />
+      </div>
 
-
-      <button type="submit">Add Project</button>
+      <button type="submit">Create Project</button>
     </form>
   );
 };
