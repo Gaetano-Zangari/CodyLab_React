@@ -7,7 +7,7 @@ const AddProject = ({ onAdd }) => {
     startDate: "",
     duration: 0,
     code: "",
-    state: "OPEN",
+    state: "open",
     manager: ""
   });
 
@@ -26,7 +26,7 @@ const AddProject = ({ onAdd }) => {
       startDate: "",
       duration: 0,
       code: "",
-      state: "OPEN",
+      state: "open",
       manager: ""
     });
   };
@@ -94,8 +94,8 @@ const AddProject = ({ onAdd }) => {
           value={form.state}
           onChange={handleChange}
         >
-          <option value="OPEN">Active</option>
-          <option value="CLOSE">Closed</option>
+          <option value="open">Open</option>
+          <option value="closed">Closed</option>
         </select>
       </div>
 

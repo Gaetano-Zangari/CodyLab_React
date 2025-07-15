@@ -33,7 +33,7 @@ function CreateUser({ addUser }) {
   };
 
   return (
-    <form className="form-user" onSubmit={handleSubmit}>
+    <form className="form-project" onSubmit={handleSubmit}>
       <h2 className="form-title">Create new user</h2>
       <div className="field">
         <label>First Name:</label>
